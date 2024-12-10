@@ -225,12 +225,9 @@ cursor.execute("SELECT * FROM arnots_data")
 rows = cursor.fetchall()
 rows
 
-#!pip install Flask
-
 from flask import Flask
 from flask import render_template
 from flask import request
-#!pip install flask_cors
 from flask_cors import CORS
 
 app = Flask(__name__)
