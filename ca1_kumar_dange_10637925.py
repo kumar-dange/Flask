@@ -218,6 +218,7 @@ arnots_df_2 = arnots_df
 
 """# Loading the Data"""
 import sqlite3
+import pandas as pd
 from flask import Flask, render_template, request, json, Response
 from flask_cors import CORS
 
