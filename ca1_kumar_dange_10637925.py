@@ -225,6 +225,7 @@ cursor.execute("SELECT * FROM arnots_data")
 rows = cursor.fetchall()
 rows
 
+
 from flask import Flask
 from flask import render_template
 from flask import request
