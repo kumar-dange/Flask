@@ -14,8 +14,8 @@ import requests
 import json
 #import pandas as pd
 git add app.py requirements.txt
-git commit -m "Add pandas script and dependencies"
-git push origin main
+#git commit -m "Add pandas script and dependencies"
+#git push origin main
 
 
 url = 'https://www.arnotts.ie/content/arnotts/ie/en/plp/jcr:content/root/container/plpcontainer.json?pagePath=https://www.arnotts.ie/men/shoes/&q%3Dmenu%3Dtrue%26offset%3D36%26limit%3D36&siteID=arnotts'
