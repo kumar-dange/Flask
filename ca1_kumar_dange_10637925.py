@@ -306,3 +306,5 @@ def getShoes():
 # Run the Flask App
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080, ssl_context=('cert.pem', 'privkey.pem'))
+
+    import pandas as pd
