@@ -10,7 +10,6 @@ Original file is located at
 """
 
 # loading 
-import pandas as pd
 import requests
 import json
 import pandas as pd
