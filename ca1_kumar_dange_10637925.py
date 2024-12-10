@@ -252,7 +252,7 @@ def addShoes():
     discountPercentage = request.form['discountPercentage']
     mostPopularityBrand = request.form['mostPopularityBrand']
     cursor = connection.cursor() 
-    s=''INSERT INTO arnots_data_2(primaryCategoryID, parentPLU, brandName, originalPrice, variationalCount, productID, productName, salePrice, discountPercentage, mostPopularityBrand)
+    s=INSERT INTO arnots_data_2(primaryCategoryID, parentPLU, brandName, originalPrice, variationalCount, productID, productName, salePrice, discountPercentage, mostPopularityBrand)
     app.logger.info(s)
     cursor.execute(s)
     connection.commit()
