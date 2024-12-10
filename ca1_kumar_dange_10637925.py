@@ -214,13 +214,15 @@ plt.show()
 print('Data types of each feature \n',arnots_df.dtypes)
 arnots_df.head()
 
+arnots_df_2 = arnots_df
+
 """# Loading the Data"""
 import sqlite3
-connection = sqlite3.connect('arnots_1.db', check_same_thread=False)
-key_features_1.to_sql('arnots_data_1', connection, if_exists='append', index=False)
+connection = sqlite3.connect('arnots_2.db', check_same_thread=False)
+arnots_df_2.to_sql('arnots_data_2', connection, if_exists='append', index=False)
 cursor = connection.cursor()
 
-cursor.execute("SELECT * FROM arnots_data_1")
+cursor.execute("SELECT * FROM arnots_data_2")
 rows = cursor.fetchall()
 rows
 
@@ -249,8 +251,8 @@ def addShoes():
     salePrice = request.form['salePrice']
     discountPercentage = request.form['discountPercentage']
     mostPopularityBrand = request.form['mostPopularityBrand']
-    cursor = connection.cursor() #create a connection to the SQL instance
-    s='''INSERT INTO arnots_data_1(primaryCategoryID, parentPLU, brandName, originalPrice, variationalCount, productID, productName, salePrice, discountPercentage, mostPopulaityBrand)
+    cursor = connection.cursor() 
+    s='''INSERT INTO arnots_data_2(primaryCategoryID, parentPLU, brandName, originalPrice, variationalCount, productID, productName, salePrice, discountPercentage, mostPopulaityBrand)
     app.logger.info(s)
     cursor.execute(s)
     connection.commit()
@@ -262,7 +264,7 @@ def addShoes():
 
 @app.route("/getShoes", methods=['GET']) #Get Shoes
 def get():
-  cursor.execute("SELECT * FROM arnots_data_1")
+  cursor.execute("SELECT * FROM arnots_data_2")
   rows = cursor.fetchall()
   Results=[]
   for row in rows: #Format the Output Results and get to return string
@@ -287,58 +289,6 @@ def get():
   return ret #Return the data in a string format
 
 if __name__ == "__main__":
-  #app.run(host='0.0.0.0',port='8080') #Run the flask app at port 8080
   app.run(host='0.0.0.0',port='8080', ssl_context=('cert.pem', 'privkey.pem')) #Run the flask app at port 8080
-  #app.run(host='0.0.0.0',port='5000', debug=True) #Run the flask app at port 8080
-
-
-
-
-import sqlite3
-connection = sqlite3.connect('arnots.db', check_same_thread=False)
-arnots_df.to_sql('arnots_data_1', connection, if_exists='append', index=False)
-cursor = connection.cursor()
-
-
-cursor.execute("SELECT * FROM arnots_data_1")
-rows = cursor.fetchall()
-rows
-
-
-from flask import Flask
-from flask import render_template
-from flask import request
-from flask_cors import CORS
-
-app = Flask(__name__)
-CORS(app)
-
-@app.route("/getShoes", methods=['GET']) #Get Shoes
-def get():
-  cursor.execute("SELECT * FROM arnots_data_1")
-  rows = cursor.fetchall()
-  Results=[]
-  for row in rows: #Format the Output Results and get to return string
-    Result={}
-    Result['primaryCategoryID']=row[0]
-    Result['parentPLU']=row[1]
-    Result['brandName']=row[2]
-    Result['originalPrice']=row[3]
-    Result['variationCount']=row[4]
-    Result['productID']=row[5]
-    Result['productName']=row[6]
-    Result['salePrice']=row[7]
-    Result['discountPercentage']=row[8]
-    Result['mostPopularityBrand']=row[9]
-    Results.append(Result)
-  response={'Results':Results, 'count':len(Results)}
-  ret=app.response_class(
-    response=json.dumps(response),
-    status=200,
-    mimetype='application/json'
-  )
-  return ret #Return the data in a string format
-
-if __name__ == "__main__":
-  app.run(host='0.0.0.0',port='5000', debug=True) #Run the flask app at port 8080
   
+
