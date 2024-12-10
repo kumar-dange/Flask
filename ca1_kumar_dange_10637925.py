@@ -215,12 +215,90 @@ print('Data types of each feature \n',arnots_df.dtypes)
 arnots_df.head()
 
 """# Loading the Data"""
+import sqlite3
+connection = sqlite3.connect('arnots_1.db', check_same_thread=False)
+key_features_1.to_sql('arnots_data_1', connection, if_exists='append', index=False)
+cursor = connection.cursor()
+
+cursor.execute("SELECT * FROM arnots_data_1")
+rows = cursor.fetchall()
+rows
+
+from flask import Flask
+from flask import render_template
+from flask import request
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route("/base.html") # Default-show data
+def home():
+    return render_template("base.html")
+
+@app.route("/addShoes", methods=['GET','POST']) # Add shoes
+def addShoes():
+  if request.method == 'POST':
+    primaryCategoryID = request.form['primaryCategoryID']
+    parentPLU = request.form['parentPLU']
+    brandName = request.form['brandName']
+    originalPrice = request.form['originalPrice']
+    variationalCount = request.form['variationalCount']
+    productID = request.form['productID']
+    productName = request.form['productName']
+    salePrice = request.form['salePrice']
+    discountPercentage = request.form['discountPercentage']
+    mostPopularityBrand = request.form['mostPopularityBrand']
+    cursor = connection.cursor() #create a connection to the SQL instance
+    s='''INSERT INTO arnots_data_1(primaryCategoryID, parentPLU, brandName, originalPrice, variationalCount, productID, productName, salePrice, discountPercentage, mostPopulaityBrand)
+    app.logger.info(s)
+    cursor.execute(s)
+    connection.commit()
+    app.config['DEBUG'] = True
+
+  else:
+    return render_template('addShoes.html')
+  return '{"Result":"Success"}'
+
+@app.route("/getShoes", methods=['GET']) #Get Shoes
+def get():
+  cursor.execute("SELECT * FROM asos_data_1")
+  rows = cursor.fetchall()
+  Results=[]
+  for row in rows: #Format the Output Results and get to return string
+    Result={}
+    Result['primaryCategoryID']=row[0]
+    Result['parentPLU']=row[1]
+    Result['brandName']=row[2]
+    Result['originalPrice']=row[3]
+    Result['variationalCount']=row[4]
+    Result['productID']=row[5]
+    Result['productName']=row[6]
+    Result['salePricePrice']=row[7]
+    Result['discountPercentage']=row[8]
+    Result['mostPopularityBrand']=row[9]
+    Results.append(Result)
+  response={'Results':Results, 'count':len(Results)}
+  ret=app.response_class(
+    response=json.dumps(response),
+    status=200,
+    mimetype='application/json'
+  )
+  return ret #Return the data in a string format
+
+if __name__ == "__main__":
+  #app.run(host='0.0.0.0',port='8080') #Run the flask app at port 8080
+  app.run(host='0.0.0.0',port='8080', ssl_context=('cert.pem', 'privkey.pem')) #Run the flask app at port 8080
+  #app.run(host='0.0.0.0',port='5000', debug=True) #Run the flask app at port 8080
+
+
+
 
 import sqlite3
 connection = sqlite3.connect('arnots.db', check_same_thread=False)
 arnots_df.to_sql('arnots_data', connection, if_exists='append', index=False)
 cursor = connection.cursor()
-!pip install pandas
+
 
 cursor.execute("SELECT * FROM arnots_data")
 rows = cursor.fetchall()
@@ -237,7 +315,7 @@ CORS(app)
 
 @app.route("/getShoes", methods=['GET']) #Get Shoes
 def get():
-  cursor.execute("SELECT * FROM arnots_data")
+  cursor.execute("SELECT * FROM arnots_data_1")
   rows = cursor.fetchall()
   Results=[]
   for row in rows: #Format the Output Results and get to return string
