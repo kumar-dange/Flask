@@ -8,43 +8,54 @@
 <body>
   <form action="/addShoes" method="POST">
 
+    <!--primaryCategoryID-->
     <label for="fname">primaryCategoryID:</label>
-    <input type="text" name="name" id="fprimaryCategoryID" required 
+    <input type="text" name="primaryCategoryID" id="fprimaryCategoryID" required
     pattern="[A-Za-z]+" title="Please enter only alphabetic characters."><br/><br/>
 
-    <label for="fid">ParentPLU (Nine Digit Unique Number):</label>
-    <input type="text" name="id" id="fid" required 
-    pattern="^\d{9}$" title="ID must be a nine-digit number." 
-    oninput="this.value = this.value.replace(/[^0-9]/g, '');" 
+    <!-- ParentPLU (Nine Digit Number): -->
+    <label for="ParentPLU">ProductCode(Nine Digit Number):</label>
+    <input type="text" name="ParentPLU" id="fParentPLU" required
+    pattern="^\d{9}$" title="ParentPLU must be a nine-digit number."
+    oninput="this.value = this.value.replace(/[^0-9]/g, '');"
     maxlength="9" minlength="9"><br/><br/>
 
+    <!-- brandName:-->
     <label for="brandName">Enter your brand name:</label>
-    <input type="text" id="fbrandName" name="brandName" required><br/><br/>
+    <input type="text" name="brandName" id="fbrandName" required 
+    pattern="[A-Za-z]+" title="Please enter only alphabetic characters."><br/><br/>
 
+    <!--originalPrice:-->
     <label for="originalPrice">Enter Original Price:</label>
-    <input type="number" id="foriginalPrice" name="originalPrice" required><br/><br/>
+    <input type="number" name="originalPrice" id="foriginalPrice" required><br/><br/>
 
-    <label for="variationalCount">Enter Variational Count (0 to 10):</label>
-    <input type="number" id="fvariationalCount" name="variationalCount" min="0" max="10" required><br/><br/>
+    <!--variationalCount-->
+    <label for="variationalCount">Enter Variational Count:</label>
+    <input type="number" id="fvariationalCount" name="variationalCount" required><br/><br/>
 
-    <label for="fid">productID (Nine Digit Unique Number):</label>
+    <!--productID:-->
+    <label for="fid">productID (Ten Digit Unique Number):</label>
     <input type="text" name="productID" id="fproductID" required 
     pattern="^\d{10}$" title="productID must be a ten-digit number." 
     oninput="this.value = this.value.replace(/[^0-10]/g, '');" 
     maxlength="10" minlength="10"><br/><br/>
 
+    <!--productName:-->
     <label for="fname">productName:</label>
     <input type="text" name="productName" id="fproductName" required 
     pattern="[A-Za-z]+" title="Please enter only alphabetic characters."><br/><br/>
 
+    <!--salelPrice:-->
     <label for="salelPrice">Enter Original Price:</label>
     <input type="number" id="fsalePrice" name="salelPrice" required><br/><br/>
 
+    <!--discountPercentage:-->
     <label for="discountPercentage">Enter Discount Percentage (0 to 100):</label>
     <input type="number" id="fdiscountPercentage" name="discountPercentage" min="0" max="100" required><br/><br/>
 
+    <!--mostPopularityBrand:-->
     <label for="mostPopularityBrand">Enter Most Popular Brand:</label>
-    <input type="number" id="fmostPopularityBrand" name="mostPopularityBrand" required><br/><br/>
+    <input type="number" id="mostPopularityBrand" name="mostPopularityBrand" required><br/><br/>
 
     <button type="submit" name="submit">Add Shoe</button>
   </form>    
