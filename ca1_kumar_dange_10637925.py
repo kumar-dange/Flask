@@ -259,7 +259,7 @@ def addShoes():
 
         # Insert into the database safely
         cursor.execute("""
-            INSERT INTO arnots_data_3 (
+            INSERT INTO arnots_data (
                 primaryCategoryID, parentPLU, brandName, originalPrice, 
                 variationalCount, productID, productName, salePrice, 
                 discountPercentage, mostPopularityBrand
@@ -278,7 +278,7 @@ def addShoes():
 # Route to Get Shoes Data
 @app.route("/getShoes", methods=['GET'])
 def getShoes():
-    cursor.execute("SELECT * FROM arnots_data_3")
+    cursor.execute("SELECT * FROM arnots_data")
     rows = cursor.fetchall()
 
     Results = []
