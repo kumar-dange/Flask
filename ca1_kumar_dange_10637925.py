@@ -214,17 +214,23 @@ plt.show()
 print('Data types of each feature \n',arnots_df.dtypes)
 arnots_df.head()
 
-arnots_df_2 = arnots_df
+arnots_df_3 = arnots_df
 
 """# Loading the Data"""
 import sqlite3
-import pandas as pd
+import pandas as pd  # Import pandas
 from flask import Flask, render_template, request, json, Response
 from flask_cors import CORS
 
 # Database Connection
-connection = sqlite3.connect('arnots_2.db', check_same_thread=False)
+connection = sqlite3.connect('arnots_3.db', check_same_thread=False)
 cursor = connection.cursor()
+arnots_df_3.to_sql('arnots_data_2', connection, if_exists='append', index=False)
+cursor = connection.cursor()
+
+cursor.execute("SELECT * FROM arnots_data_3")
+rows = cursor.fetchall()
+rows
 
 # Flask App Initialization
 app = Flask(__name__)
@@ -232,7 +238,7 @@ CORS(app)
 
 # Default Route - Show Data
 @app.route("/base.html")
-def home():
+def base():
     return render_template("base.html")
 
 # Route to Add Shoes
@@ -253,7 +259,7 @@ def addShoes():
 
         # Insert into the database safely
         cursor.execute("""
-            INSERT INTO arnots_data_2 (
+            INSERT INTO arnots_data_3 (
                 primaryCategoryID, parentPLU, brandName, originalPrice, 
                 variationalCount, productID, productName, salePrice, 
                 discountPercentage, mostPopularityBrand
@@ -272,7 +278,7 @@ def addShoes():
 # Route to Get Shoes Data
 @app.route("/getShoes", methods=['GET'])
 def getShoes():
-    cursor.execute("SELECT * FROM arnots_data_2")
+    cursor.execute("SELECT * FROM arnots_data_3")
     rows = cursor.fetchall()
 
     Results = []
