@@ -223,12 +223,12 @@ from flask import Flask, render_template, request, json, Response
 from flask_cors import CORS
 
 # Database Connection
-connection = sqlite3.connect('arnots_3.db', check_same_thread=False)
+connection = sqlite3.connect('arnots.db', check_same_thread=False)
 cursor = connection.cursor()
-arnots_df_3.to_sql('arnots_data_2', connection, if_exists='append', index=False)
+arnots_df_3.to_sql('arnots_data', connection, if_exists='append', index=False)
 cursor = connection.cursor()
 
-cursor.execute("SELECT * FROM arnots_data_3")
+cursor.execute("SELECT * FROM arnots_data")
 rows = cursor.fetchall()
 rows
 
