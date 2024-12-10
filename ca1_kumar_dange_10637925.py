@@ -8,7 +8,9 @@ Original file is located at
 
 # **CA1 PROJECT**
 """
-# loading libraries
+
+# loading 
+import pandas as pd
 import requests
 import json
 import pandas as pd
