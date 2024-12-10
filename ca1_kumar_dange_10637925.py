@@ -220,7 +220,7 @@ import sqlite3
 connection = sqlite3.connect('arnots.db', check_same_thread=False)
 arnots_df.to_sql('arnots_data', connection, if_exists='append', index=False)
 cursor = connection.cursor()
-import pandas as pd
+pip install pandas
 
 cursor.execute("SELECT * FROM arnots_data")
 rows = cursor.fetchall()
