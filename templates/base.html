@@ -48,22 +48,16 @@ let doIt=()=>{
       x=>{
         let newRow=rows[0].cloneNode(true);
         let divs=newRow.getElementsByTagName('td');
-        divs[0].innerHTML=x['id'];
-        divs[1].innerHTML=x['name'];
-        divs[2].innerHTML=x['colourWayId'];
-        divs[3].innerHTML=x['brandName'];
-        divs[4].innerHTML=x['productCode'];
-        divs[5].innerHTML=x['sellingIsFast'];
-        divs[6].innerHTML=x['currentPrice'];
-        divs[7].innerHTML=x['previousPrice'];
-        divs[8].innerHTML=x['lowestPriceInLast30Days'];
-        divs[9].innerHTML=x['priceIsMarkedDown'];
-        divs[10].innerHTML=x['currency'];
-        // divs[11].innerHTML=x['brandName_encoded'];
-        // divs[11].innerHTML=x['brandName'];
-        divs[11].innerHTML=x['price_range_indicator'];
-        divs[12].innerHTML=x['discount_percentage'];
-        divs[13].innerHTML=x['lowest_price_tag'];
+        divs[0].innerHTML=x['primaryCategoryID'];
+        divs[1].innerHTML=x['parentPLU'];
+        divs[2].innerHTML=x['brandName'];
+        divs[3].innerHTML=x['originalPice'];
+        divs[4].innerHTML=x['variationalCount'];
+        divs[5].innerHTML=x['productID'];
+        divs[6].innerHTML=x['productName'];
+        divs[7].innerHTML=x['salePrice'];
+        divs[8].innerHTML=x['discountPercentage'];
+        divs[9].innerHTML=x['mostPopularityBrand'];
         <!--tab1.appendChild(newRow)--> 
         tab1.insertBefore(newRow, rows[1]);
       }

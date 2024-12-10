@@ -230,7 +230,7 @@ rows
 from flask import Flask
 from flask import render_template
 from flask import request
-!pip install flask_cors
+#!pip install flask_cors
 from flask_cors import CORS
 
 app = Flask(__name__)
