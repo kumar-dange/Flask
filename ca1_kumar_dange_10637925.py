@@ -14,6 +14,7 @@ import requests
 import json
 #import pandas as pd
 #pandas
+pip install pandas
 import pandas as pd
 url = 'https://www.arnotts.ie/content/arnotts/ie/en/plp/jcr:content/root/container/plpcontainer.json?pagePath=https://www.arnotts.ie/men/shoes/&q%3Dmenu%3Dtrue%26offset%3D36%26limit%3D36&siteID=arnotts'
 
