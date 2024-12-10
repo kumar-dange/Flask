@@ -218,75 +218,84 @@ arnots_df_2 = arnots_df
 
 """# Loading the Data"""
 import sqlite3
-connection = sqlite3.connect('arnots_2.db', check_same_thread=False)
-arnots_df_2.to_sql('arnots_data_2', connection, if_exists='append', index=False)
-cursor = connection.cursor()
-
-cursor.execute("SELECT * FROM arnots_data_2")
-rows = cursor.fetchall()
-rows
-
-from flask import Flask
-from flask import render_template
-from flask import request
+from flask import Flask, render_template, request, json, Response
 from flask_cors import CORS
 
+# Database Connection
+connection = sqlite3.connect('arnots_2.db', check_same_thread=False)
+cursor = connection.cursor()
+
+# Flask App Initialization
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/base.html") # Default-show data
+# Default Route - Show Data
+@app.route("/base.html")
 def home():
     return render_template("base.html")
 
-@app.route("/addShoes", methods=['GET','POST']) # Add shoes
+# Route to Add Shoes
+@app.route("/addShoes", methods=['GET', 'POST'])
 def addShoes():
-  if request.method == 'POST':
-    primaryCategoryID = request.form['primaryCategoryID']
-    parentPLU = request.form['parentPLU']
-    brandName = request.form['brandName']
-    originalPrice = request.form['originalPrice']
-    variationalCount = request.form['variationalCount']
-    productID = request.form['productID']
-    productName = request.form['productName']
-    salePrice = request.form['salePrice']
-    discountPercentage = request.form['discountPercentage']
-    mostPopularityBrand = request.form['mostPopularityBrand']
-    cursor = connection.cursor() 
-    s=INSERT INTO arnots_data_2(primaryCategoryID, parentPLU, brandName, originalPrice, variationalCount, productID, productName, salePrice, discountPercentage, mostPopularityBrand)
-    app.logger.info(s)
-    cursor.execute(s)
-    connection.commit()
-    app.config['DEBUG'] = True
+    if request.method == 'POST':
+        # Fetch form data
+        primaryCategoryID = request.form.get('primaryCategoryID')
+        parentPLU = request.form.get('parentPLU')
+        brandName = request.form.get('brandName')
+        originalPrice = request.form.get('originalPrice')
+        variationalCount = request.form.get('variationalCount')
+        productID = request.form.get('productID')
+        productName = request.form.get('productName')
+        salePrice = request.form.get('salePrice')
+        discountPercentage = request.form.get('discountPercentage')
+        mostPopularityBrand = request.form.get('mostPopularityBrand')
 
-  else:
-    return render_template('addShoes.html')
-  return '{"Result":"Success"}'
+        # Insert into the database safely
+        cursor.execute("""
+            INSERT INTO arnots_data_2 (
+                primaryCategoryID, parentPLU, brandName, originalPrice, 
+                variationalCount, productID, productName, salePrice, 
+                discountPercentage, mostPopularityBrand
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            primaryCategoryID, parentPLU, brandName, originalPrice, 
+            variationalCount, productID, productName, salePrice, 
+            discountPercentage, mostPopularityBrand
+        ))
+        connection.commit()
 
-@app.route("/getShoes", methods=['GET']) #Get Shoes
-def get():
-  cursor.execute("SELECT * FROM arnots_data_2")
-  rows = cursor.fetchall()
-  Results=[]
-  for row in rows: #Format the Output Results and get to return string
-    Result={}
-    Result['primaryCategoryID']=row[0]
-    Result['parentPLU']=row[1]
-    Result['brandName']=row[2]
-    Result['originalPrice']=row[3]
-    Result['variationalCount']=row[4]
-    Result['productID']=row[5]
-    Result['productName']=row[6]
-    Result['salePricePrice']=row[7]
-    Result['discountPercentage']=row[8]
-    Result['mostPopularityBrand']=row[9]
-    Results.append(Result)
-  response={'Results':Results, 'count':len(Results)}
-  ret=app.response_class(
-    response=json.dumps(response),
-    status=200,
-    mimetype='application/json'
-  )
-  return ret #Return the data in a string format
+        return '{"Result":"Success"}'
+    else:
+        return render_template('addShoes.html')
 
+# Route to Get Shoes Data
+@app.route("/getShoes", methods=['GET'])
+def getShoes():
+    cursor.execute("SELECT * FROM arnots_data_2")
+    rows = cursor.fetchall()
+
+    Results = []
+    for row in rows:
+        Results.append({
+            'primaryCategoryID': row[0],
+            'parentPLU': row[1],
+            'brandName': row[2],
+            'originalPrice': row[3],
+            'variationalCount': row[4],
+            'productID': row[5],
+            'productName': row[6],
+            'salePrice': row[7],
+            'discountPercentage': row[8],
+            'mostPopularityBrand': row[9]
+        })
+
+    response = {
+        'Results': Results,
+        'count': len(Results)
+    }
+
+    return Response(json.dumps(response), status=200, mimetype='application/json')
+
+# Run the Flask App
 if __name__ == "__main__":
-  app.run(host='0.0.0.0',port='8080', ssl_context=('cert.pem', 'privkey.pem')) #Run the flask app at port 8080
+    app.run(host='0.0.0.0', port=8080, ssl_context=('cert.pem', 'privkey.pem'))
