@@ -262,7 +262,7 @@ def addShoes():
 
 @app.route("/getShoes", methods=['GET']) #Get Shoes
 def get():
-  cursor.execute("SELECT * FROM asos_data_1")
+  cursor.execute("SELECT * FROM arnots_data_1")
   rows = cursor.fetchall()
   Results=[]
   for row in rows: #Format the Output Results and get to return string
@@ -296,11 +296,11 @@ if __name__ == "__main__":
 
 import sqlite3
 connection = sqlite3.connect('arnots.db', check_same_thread=False)
-arnots_df.to_sql('arnots_data', connection, if_exists='append', index=False)
+arnots_df.to_sql('arnots_data_1', connection, if_exists='append', index=False)
 cursor = connection.cursor()
 
 
-cursor.execute("SELECT * FROM arnots_data")
+cursor.execute("SELECT * FROM arnots_data_1")
 rows = cursor.fetchall()
 rows
 
@@ -340,6 +340,5 @@ def get():
   return ret #Return the data in a string format
 
 if __name__ == "__main__":
-  #app.run(host='0.0.0.0',port='8080') #Run the flask app at port 8080
   app.run(host='0.0.0.0',port='5000', debug=True) #Run the flask app at port 8080
-  #app.run(host='0.0.0.0',port='8080', ssl_context=('cert.pem', 'privkey.pem')) #Run the flask app at port 8080
+  
