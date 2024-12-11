@@ -31,23 +31,23 @@
 
     <!--variationalCount-->
     <label for="variationalCount">Enter Variational Count:</label>
-    <input type="number" name="variationalCount" id="fvariationalCount" ><br/><br/>
+    <input type="number" name="variationalCount" id="fvariationalCount" required ><br/><br/>
 
-    <!--productID:-->
-    <label for="fid">productID (Ten Digit Unique Number):</label>
-    <input type="text" name="productID" id="fproductID" required 
-    pattern="^\d{10}$" title="productID must be a ten-digit number." 
-    oninput="this.value = this.value.replace(/[^0-10]/g, '');" 
+    <!-- ProductID (Ten Digit Number): -->
+    <label for="ProductID">ProductCode(Nine Digit Number):</label>
+    <input type="text" name="ProductID" id="fProductID" required
+    pattern="^\d{10}$" title="ProductID must be a nine-digit number."
+    oninput="this.value = this.value.replace(/[^0-10]/g, '');"
     maxlength="10" minlength="10"><br/><br/>
 
     <!--productName:-->
     <label for="fname">productName:</label>
     <input type="text" name="productName" id="fproductName" required 
-    pattern="[A-Za-z]+" title="Please enter only alphabetic characters."><br/><br/>
+    pattern="[A-Za-z]+" title="Please enter only alphabetic characters." required ><br/><br/>
 
     <!--salelPrice:-->
     <label for="salelPrice">Enter sale Price:</label>
-    <input type="number" name="salelPrice" id="fsalePrice" ><br/><br/>
+    <input type="number" name="salelPrice" id="fsalePrice" required ><br/><br/>
 
     <!--discountPercentage:-->
     <label for="discountPercentage">Enter Discount Percentage:</label>
@@ -56,7 +56,7 @@
 
     <!--mostPopularityBrand:-->
     <label for="mostPopularityBrand">Enter Most Popular Brand:</label>
-    <input type="number" name="mostPopularityBrand" id="mostPopularityBrand" ><br/><br/>
+    <input type="number" id="mostPopularityBrand" required ><br/><br/>
 
     <button type="submit" name="submit">Add Shoe</button>
   </form>    
