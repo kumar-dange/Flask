@@ -14,9 +14,9 @@
     pattern="[A-Za-z]+" title="Please enter only alphabetic characters."><br/><br/>
 
     <!-- ParentPLU (Nine Digit Number): -->
-    <label for="ParentPLU">ProductCode(Nine Digit Number):</label>
-    <input type="text" name="ParentPLU" id="fParentPLU" required
-    pattern="^\d{9}$" title="ParentPLU must be a nine-digit number."
+    <label for="parentPLU">parentPLU(Nine Digit Number):</label>
+    <input type="text" name="parentPLU" id="fparentPLU" required
+    pattern="^\d{9}$" title="parentPLU must be a nine-digit number."
     oninput="this.value = this.value.replace(/[^0-9]/g, '');"
     maxlength="9" minlength="9"><br/><br/>
 
@@ -34,14 +34,14 @@
     <input type="number" name="variationalCount" id="fvariationalCount" required ><br/><br/>
 
     <!-- ProductID (Ten Digit Number): -->
-    <label for="ProductID">ProductCode(Nine Digit Number):</label>
-    <input type="text" name="ProductID" id="fProductID" required
-    pattern="^\d{10}$" title="ProductID must be a nine-digit number."
+    <label for="productID">productID(Nine Digit Number):</label>
+    <input type="text" name="productID" id="fproductID" required
+    pattern="^\d{10}$" title="productID must be a nine-digit number."
     oninput="this.value = this.value.replace(/[^0-10]/g, '');"
     maxlength="10" minlength="10"><br/><br/>
 
     <!--productName:-->
-    <label for="fname">productName:</label>
+    <label for="productName">productName:</label>
     <input type="text" name="productName" id="fproductName" required 
     pattern="[A-Za-z]+" title="Please enter only alphabetic characters." required ><br/><br/>
 
@@ -56,7 +56,7 @@
 
     <!--mostPopularityBrand:-->
     <label for="mostPopularityBrand">Enter Most Popular Brand:</label>
-    <input type="number" id="mostPopularityBrand" required ><br/><br/>
+    <input type="number" name="mostPopularityBrand" id="fmostPopularityBrand" required ><br/><br/>
 
     <button type="submit" name="submit">Add Shoe</button>
   </form>    
