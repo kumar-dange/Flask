@@ -29,15 +29,16 @@
     <label for="originalPrice">Enter Original Price:</label>
     <input type="number" name="originalPrice" id="foriginalPrice" required ><br/><br/>
 
-    <!--variationalCount-->
+    
+    <!--variationalCount:-->
     <label for="variationalCount">Enter Variational Count:</label>
     <input type="number" name="variationalCount" id="fvariationalCount" required ><br/><br/>
 
-    <!-- ProductID (Ten Digit Number): -->
-    <label for="productID">productID(Nine Digit Number):</label>
+    <!-- ProductID: -->
+    <label for="productID">productID (Ten Digit Number):</label>
     <input type="text" name="productID" id="fproductID" required
-    pattern="^\d{10}$" title="productID must be a nine-digit number."
-    oninput="this.value = this.value.replace(/[^0-10]/g, '');"
+    pattern="^\d{10}$" title="productID must be a ten-digit number."
+    oninput="this.value = this.value.replace(/[^0-9]/g, '');"
     maxlength="10" minlength="10"><br/><br/>
 
     <!--productName:-->
